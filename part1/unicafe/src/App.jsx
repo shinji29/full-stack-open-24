@@ -1,60 +1,92 @@
 import { useState } from "react";
 
+const Header = ({ text }) => <h1>{text}</h1>;
+
 const Button = ({ onClick, text }) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
+const Statistic = ({ text, value }) => {
+  if (text === "Positive")
+    return (
+      <tr>
+        <td>{text}</td>
+        <td> </td>
+        <td>
+          <b>{value}</b> %
+        </td>
+      </tr>
+    );
+
+  return (
+    <tr>
+      <td>{text}</td>
+      <td> </td>
+      <td>
+        <b>{value}</b>
+      </td>
+    </tr>
+  );
+};
+
+const Statistics = ({ reviews }) => {
+  const total = reviews.good + reviews.neutral + reviews.bad;
+  if (total === 0) return <p>No feedback given.</p>;
+
+  const positive = total !== 0 ? (reviews.good / total) * 100 : 0.0;
+  const average =
+    total !== 0 ? (reviews.good * 1 + reviews.bad * -1) / total : 0.0;
+
+  return (
+    <table>
+      <tbody>
+        <Statistic text={"Good"} value={reviews.good} />
+        <Statistic text={"Neutral"} value={reviews.neutral} />
+        <Statistic text={"Bad"} value={reviews.bad} />
+        <Statistic text={"All"} value={total} />
+        <Statistic text={"Average"} value={average} />
+        <Statistic text={"Positive"} value={positive} />
+      </tbody>
+    </table>
+  );
+};
+
 const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [reviews, setReviews] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  });
 
   const handleGood = () => {
-    setGood(good + 1);
-    setTotal(total + 1);
+    setReviews({
+      ...reviews,
+      good: reviews.good + 1,
+    });
   };
 
   const handleNeutral = () => {
-    setNeutral(neutral + 1);
-    setTotal(total + 1);
+    setReviews({
+      ...reviews,
+      neutral: reviews.neutral + 1,
+    });
   };
 
   const handleBad = () => {
-    setBad(bad + 1);
-    setTotal(total + 1);
+    setReviews({
+      ...reviews,
+      bad: reviews.bad + 1,
+    });
   };
 
   return (
     <div>
-      <h1>Give Feedback</h1>
-      <span>
-        <Button text={"Good"} onClick={handleGood} />{" "}
-        <Button text={"Neutral"} onClick={handleNeutral} />{" "}
-        <Button text={"Bad"} onClick={handleBad} />
-      </span>
-      <div>
-        <h2>Statistics</h2>
-        <p>
-          Good <b>{good}</b>
-        </p>
-        <p>
-          Neutral <b>{neutral}</b>
-        </p>
-        <p>
-          Bad <b>{bad}</b>
-        </p>
-        <p>
-          total <b>{total}</b>
-        </p>
-        <p>
-          Average{" "}
-          {total > 0 ? <b>{(good * 1 + bad * -1) / total}</b> : <b>0.00</b>}
-        </p>
-        <p>
-          Positive {total > 0 ? <b>{(good / total) * 100}%</b> : <b>0.00%</b>}
-        </p>
-      </div>
+      <Header text={"Give Feedback"} />
+      <Button text={"Good"} onClick={handleGood} />{" "}
+      <Button text={"Neutral"} onClick={handleNeutral} />{" "}
+      <Button text={"Bad"} onClick={handleBad} />
+      <Header text={"Statistics"} />
+      <Statistics reviews={reviews} />
     </div>
   );
 };
