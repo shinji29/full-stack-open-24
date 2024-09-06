@@ -1,29 +1,21 @@
 import { useState } from "react";
+import "./styles/App.css";
 
-const Header = ({ text }) => <h1>{text}</h1>;
+const Header = ({ text }) => <h1 className="header">{text}</h1>;
 
 const Button = ({ onClick, text }) => {
-  return <button onClick={onClick}>{text}</button>;
+  return (
+    <button className="btn" onClick={onClick}>
+      {text}
+    </button>
+  );
 };
 
 const Anecdote = ({ anecdote, vote }) => {
   return (
-    <p>
+    <p className="content">
       "{anecdote}" has <b>{vote}</b> votes.
     </p>
-  );
-};
-
-const Winner = ({ anecdotes, votes }) => {
-  const mostVotes = Math.max(...votes);
-  if (mostVotes === 0) return <p>No votes have been recorded.</p>;
-
-  const indexMostVotes = votes.indexOf(mostVotes);
-  return (
-    <Anecdote
-      anecdote={anecdotes[indexMostVotes]}
-      vote={votes[indexMostVotes]}
-    />
   );
 };
 
@@ -39,27 +31,42 @@ function App() {
     "The only way to go fast, is to go well.",
   ];
 
-  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+  const [votes, setVotes] = useState(anecdotes.map((_) => 0));
   const [selected, setSelected] = useState(0);
+  const [mostVotes, setMostVotes] = useState(0);
 
   const vote = () => {
     const newVotes = [...votes];
     newVotes[selected] += 1;
     setVotes(newVotes);
+
+    if (newVotes[selected] > votes[mostVotes]) setMostVotes(selected);
   };
 
   const nextAnecdote = () => {
-    setSelected(Math.floor(Math.random() * anecdotes.length));
+    while (true) {
+      const nextIndex = Math.floor(Math.random() * anecdotes.length);
+      if (nextIndex !== selected) {
+        setSelected(nextIndex);
+        break;
+      }
+    }
   };
 
   return (
     <div>
       <Header text={"Anecdote of the day"} />
       <Anecdote anecdote={anecdotes[selected]} vote={votes[selected]} />
-      <Button onClick={vote} text={"Vote"} />{" "}
-      <Button onClick={nextAnecdote} text={"Next Anecdote"} />
+      <span className="btns">
+        <Button onClick={vote} text={"Vote"} />
+        <Button onClick={nextAnecdote} text={"Next"} />
+      </span>
       <Header text={"Anecdote with most votes"} />
-      <Winner anecdotes={anecdotes} votes={votes} />
+      {Math.max(...votes) === 0 ? (
+        <p className="content">No votes have been recorded yet.</p>
+      ) : (
+        <Anecdote anecdote={anecdotes[mostVotes]} vote={votes[mostVotes]} />
+      )}
     </div>
   );
 }
