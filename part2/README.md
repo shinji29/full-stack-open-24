@@ -13,7 +13,7 @@ Lastly, we will take a quick look at a few simple ways of adding **CSS styles** 
 * [yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable)
 
 
-## Start the application
+## Start an application
 
 There is one application by folder. To start an application :
 
