@@ -20,4 +20,4 @@ $ npm i
 $ npm run dev
 ```
 
-You can then access the frontend on : [http://localhost:5173/](http://localhost:5173/)
+You can then access the frontend on [http://localhost:5173/](http://localhost:5173/) if you have followed along properly.
