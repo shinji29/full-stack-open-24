@@ -7,7 +7,7 @@ In this part, we will familiarize ourselves with the **React** library, which we
 * [yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable)
 
 
-## Start the application
+## Start an application
 
 There is one application by folder. To start an application :
 
