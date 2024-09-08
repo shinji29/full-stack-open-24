@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+
+import Form from "./components/Form";
+import Notes from "./components/Notes";
+import Header from "./components/Header";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [notes, setNotes] = useState([]);
+  const [newNote, setNewNote] = useState("");
+  const [showAll, setShowAll] = useState(true);
+
+  const handleNoteChange = (event) => {
+    event.preventDefault();
+    setNewNote(event.target.value);
+  };
+
+  const addNote = (event) => {
+    event.preventDefault();
+
+    if (newNote.length !== 0) {
+      const noteObject = {
+        id: String(notes.length + 1),
+        content: newNote,
+        important: Math.random() > 0.5,
+      };
+
+      setNotes(notes.concat(noteObject));
+      setNewNote("");
+    }
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header text={"Notes"} />
+      <Form
+        showAll={showAll}
+        newNote={newNote}
+        addNote={addNote}
+        setShowAll={setShowAll}
+        handleNoteChange={handleNoteChange}
+      />
+      <br />
+      <button onClick={() => setShowAll(!showAll)}>
+        {showAll ? "Show Important" : "Show All"}
+      </button>
+      <hr />
+      <Notes notes={notes} showAll={showAll} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
