@@ -10,7 +10,6 @@ Lastly, we will take a quick look at a few simple ways of adding **CSS styles** 
 
 ## Requirements
 * [node](https://nodejs.org/en/download/)
-* [yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable)
 
 
 ## Start an application
