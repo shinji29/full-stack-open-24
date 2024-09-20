@@ -11,7 +11,6 @@ Lastly, we will take a quick look at a few simple ways of adding **CSS styles** 
 ## Requirements
 * [node](https://nodejs.org/en/download/)
 
-
 ## Start an application
 
 There is one application by folder. To start an application :
