@@ -1,52 +1,59 @@
 import { useState } from "react";
-
 import Form from "./components/Form";
-import Notes from "./components/Notes";
-import Header from "./components/Header";
+import Filter from "./components/Filter";
+import Persons from "./components/Persons";
 
-function App() {
-  const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("");
-  const [showAll, setShowAll] = useState(true);
+const App = () => {
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas", number: "040-123456", id: 1 },
+    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
+    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
+    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
+  ]);
+  const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const handleNoteChange = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    setNewNote(event.target.value);
-  };
 
-  const addNote = (event) => {
-    event.preventDefault();
+    const numberExists = persons.some((person) => person.number === newNumber);
+    const nameExists = persons.some(
+      (person) => person.name.toLowerCase() === newName.toLowerCase()
+    );
 
-    if (newNote.length !== 0) {
-      const noteObject = {
-        id: String(notes.length + 1),
-        content: newNote,
-        important: Math.random() > 0.5,
+    if (nameExists) {
+      window.alert(`${newName} already exists in the phonebook.`);
+    } else if (numberExists) {
+      window.alert(`${newNumber} already exists in the phonebook.`);
+    } else if (newName.length !== 0 && newNumber.length !== 0) {
+      const newPerson = {
+        id: String(persons.length + 1),
+        name: newName,
+        number: newNumber,
       };
-
-      setNotes(notes.concat(noteObject));
-      setNewNote("");
+      setPersons(persons.concat(newPerson));
+      setNewNumber("");
+      setNewName("");
+    } else {
+      window.alert("Please fill out both of the fields.");
     }
   };
 
   return (
-    <>
-      <Header text={"Notes"} />
+    <div>
+      <h1>Phonebook</h1>
+      <Filter searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Form
-        showAll={showAll}
-        newNote={newNote}
-        addNote={addNote}
-        setShowAll={setShowAll}
-        handleNoteChange={handleNoteChange}
+        newName={newName}
+        setNewName={setNewName}
+        newNumber={newNumber}
+        setNewNumber={setNewNumber}
+        handleSubmit={handleSubmit}
       />
-      <br />
-      <button onClick={() => setShowAll(!showAll)}>
-        {showAll ? "Show Important" : "Show All"}
-      </button>
-      <hr />
-      <Notes notes={notes} showAll={showAll} />
-    </>
+      <Persons searchQuery={searchQuery} persons={persons} />
+    </div>
   );
-}
+};
 
 export default App;
