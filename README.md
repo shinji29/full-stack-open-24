@@ -8,6 +8,8 @@ GraphQL, a modern alternative to REST APIs is also covered by this course. As we
 
 #### This repository contains my solutions for this course's exercises.
 
+---
+
 <!--[couse certificate](https://studies.cs.helsinki.fi/stats/api/certificate/fullstackopen/en/fff9bc0633b27820d3a04756dd40455e)-->
 
 ### [Part 0 - Fundamentals of Web apps](./part0)
