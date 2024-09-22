@@ -6,18 +6,17 @@ import Filter from "./components/Filter";
 import Persons from "./components/Persons";
 
 const App = () => {
+  const apiUrl = import.meta.env.VITE_PERSONS;
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    axios.get(import.meta.env.VITE_PERSONS).then((response) => {
+    axios.get(apiUrl).then((response) => {
       setPersons(response.data);
     });
   }, []);
-
-  console.log(`Fetched ${persons.length} contacts from server.`);
 
   const handleSubmit = (event) => {
     event.preventDefault();
