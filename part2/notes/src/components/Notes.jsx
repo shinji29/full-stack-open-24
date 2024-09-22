@@ -1,11 +1,13 @@
-function Note({ notes }) {
+function Notes({ notes, showAll }) {
   return (
-    <div>
-      {notes.map((note) => (
-        <p key={note.id}>{note.content}</p>
-      ))}
-    </div>
+    <ul>
+      {showAll
+        ? notes.map((note) => <li key={note.id}>{note.content}</li>)
+        : notes
+            .filter((note) => note.important)
+            .map((note) => <li key={note.id}>{note.content}</li>)}
+    </ul>
   );
 }
 
-export default Note;
+export default Notes;
