@@ -35,7 +35,6 @@ const App = () => {
       const noteObject = {
         content: newNote,
         important: Math.random() > 0.5,
-        id: notes.length + 1,
       };
 
       await noteServices.createNote(noteObject).then((createdNote) => {
@@ -62,6 +61,15 @@ const App = () => {
       });
   };
 
+  const deletion = (id) => {
+    noteServices
+      .deleteNote(id)
+      .then((deletedNote) => {
+        setNotes(notes.filter((note) => note.id !== id));
+      })
+      .catch((error) => console.log(`Error deleting note #${id}: ${error}`));
+  };
+
   return (
     <>
       <h2>Notes</h2>
@@ -76,6 +84,7 @@ const App = () => {
       <Notes
         notes={notes}
         showAll={showAll}
+        deletion={deletion}
         toggleImportance={toggleImportance}
       />
     </>

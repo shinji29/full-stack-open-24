@@ -1,4 +1,4 @@
-function Notes({ notes, showAll, toggleImportance }) {
+function Notes({ notes, showAll, deletion, toggleImportance }) {
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
   return (
@@ -16,6 +16,9 @@ function Notes({ notes, showAll, toggleImportance }) {
                 <button onClick={() => toggleImportance(note.id)}>
                   {note.important ? "Mark unimportant" : "Mark important"}
                 </button>
+              </td>
+              <td>
+                <button onClick={() => deletion(note.id)}>Delete</button>
               </td>
             </tr>
           ))
