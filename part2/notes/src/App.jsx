@@ -9,17 +9,18 @@ import noteServices from "./services/notes";
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(true);
 
   useEffect(() => {
-    const fetchNotes = async () => {
+    async function fetchNotes() {
       try {
-        const initialNotes = await noteServices.getAll();
-        setNotes(initialNotes);
+        const data = await noteServices.fetchNotes();
+        setNotes(data);
       } catch (error) {
         console.log(`Error fetching notes : ${error}`);
+        setNotes([]);
       }
-    };
+    }
 
     fetchNotes();
   }, []);
@@ -54,9 +55,7 @@ const App = () => {
         setNotes(notes.map((note) => (note.id === id ? updatedNote : note)))
       )
       .catch((error) => {
-        alert(
-          `The note "${note.content}" was already deleted from the server.`
-        );
+        alert(`Error updating note : ${error}`);
         setNotes(notes.filter((note) => note.id !== id));
       });
   };

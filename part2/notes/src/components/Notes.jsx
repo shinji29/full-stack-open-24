@@ -6,7 +6,7 @@ function Notes({ notes, showAll, deletion, toggleImportance }) {
       <tbody>
         {notesToShow.length === 0 ? (
           <tr>
-            <th>No important notes</th>
+            <th>No notes to show.</th>
           </tr>
         ) : (
           notesToShow.map((note) => (
