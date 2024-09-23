@@ -65,7 +65,7 @@ const App = () => {
     noteServices
       .deleteNote(id)
       .then((deletedNote) => {
-        setNotes(notes.filter((note) => note.id !== id));
+        setNotes(notes.filter((note) => note.id !== deletedNote.id));
       })
       .catch((error) => console.log(`Error deleting note #${id}: ${error}`));
   };
