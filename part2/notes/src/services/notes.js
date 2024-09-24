@@ -1,7 +1,5 @@
-import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
 
-const baseUrl = import.meta.env.VITE_API;
 const supabase = createClient(
   import.meta.env.VITE_PROJECT_URL,
   import.meta.env.VITE_API_KEY
