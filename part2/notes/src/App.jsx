@@ -57,7 +57,7 @@ const App = () => {
         )
       )
       .catch((error) => {
-        alert(`Error updating note : ${error}`);
+        window.alert(`Error updating note : ${error}`);
         setNotes(notes.filter((note) => note.id !== id));
       });
   };
