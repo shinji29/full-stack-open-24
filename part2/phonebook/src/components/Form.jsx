@@ -1,7 +1,7 @@
 function Form({ newName, setNewName, newNumber, setNewNumber, handleSubmit }) {
   return (
     <form>
-      <h3>Add New Contact</h3>
+      <h3>Add New Number</h3>
       <table cellPadding={2} cellSpacing={4}>
         <tbody>
           <tr>
@@ -11,6 +11,7 @@ function Form({ newName, setNewName, newNumber, setNewNumber, handleSubmit }) {
                 type="text"
                 onChange={(e) => setNewName(e.target.value)}
                 value={newName}
+                required={true}
               />
             </td>
           </tr>
@@ -21,6 +22,7 @@ function Form({ newName, setNewName, newNumber, setNewNumber, handleSubmit }) {
                 type="text"
                 onChange={(e) => setNewNumber(e.target.value)}
                 value={newNumber}
+                required={true}
               />
             </td>
           </tr>
