@@ -8,34 +8,51 @@ const supabase = createClient(
 );
 
 async function createNote(newNote) {
-  const request = axios.post(baseUrl, newNote);
-  return request.then((response) => {
-    return response.data;
-  });
+  const { data, error } = await supabase.from("notes").insert(newNote).select();
+  if (error) {
+    console.log(`Error fetching notes : ${error}`);
+    return [];
+  } else {
+    return data;
+  }
 }
 
 async function fetchNotes() {
-  try {
-    const { data } = await supabase.from("notes").select();
-    return data;
-  } catch (error) {
+  const { data, error } = await supabase.from("notes").select();
+  if (error) {
     console.log(`Error fetching notes : ${error}`);
     return [];
+  } else {
+    return data;
   }
 }
 
 async function updateNote(id, updatedNote) {
-  const request = axios.put(`${baseUrl}/${id}`, updatedNote);
-  return request.then((response) => {
-    return response.data;
-  });
+  const { data, error } = await supabase
+    .from("notes")
+    .update({ important: updatedNote.important })
+    .eq("id", id)
+    .select();
+  if (error) {
+    console.log(`Error updating note : ${error}`);
+    return null;
+  } else {
+    return data.id;
+  }
 }
 
 async function deleteNote(id) {
-  const request = axios.delete(`${baseUrl}/${id}`);
-  return request.then((response) => {
-    return response.data;
-  });
+  const { data, error } = await supabase
+    .from("notes")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) {
+    console.log(`Error deleting note : ${error}`);
+    return null;
+  } else {
+    return data.id;
+  }
 }
 
 export default {

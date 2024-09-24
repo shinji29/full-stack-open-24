@@ -23,7 +23,7 @@ const App = () => {
     }
 
     fetchNotes();
-  }, []);
+  }, [notes]);
 
   const handleNoteChange = (event) => {
     setNewNote(event.target.value);
@@ -51,8 +51,10 @@ const App = () => {
 
     noteServices
       .updateNote(id, noteUpdate)
-      .then((updatedNote) =>
-        setNotes(notes.map((note) => (note.id === id ? updatedNote : note)))
+      .then((updatedId) =>
+        setNotes(
+          notes.map((note) => (note.id === updatedId ? noteUpdate : note))
+        )
       )
       .catch((error) => {
         alert(`Error updating note : ${error}`);
@@ -63,8 +65,8 @@ const App = () => {
   const deletion = (id) => {
     noteServices
       .deleteNote(id)
-      .then((deletedNote) => {
-        setNotes(notes.filter((note) => note.id !== deletedNote.id));
+      .then((deletedId) => {
+        setNotes(notes.filter((note) => note.id !== deletedId));
       })
       .catch((error) => console.log(`Error deleting note #${id}: ${error}`));
   };
