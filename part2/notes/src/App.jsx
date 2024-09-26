@@ -1,15 +1,20 @@
+import noteServices from "./services/notes";
 import { useState, useEffect } from "react";
 
 import Form from "./components/Form";
 import Notes from "./components/Notes";
 import Button from "./components/Button";
+import Notification from "./components/Notification";
 
-import noteServices from "./services/notes";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
+  const [message, setMessage] = useState({
+    content: null,
+    nature: "success",
+  });
 
   useEffect(() => {
     async function fetchNotes() {
@@ -17,7 +22,16 @@ const App = () => {
         const data = await noteServices.fetchNotes();
         setNotes(data);
       } catch (error) {
-        console.log(`Error fetching notes : ${error}`);
+        setMessage({
+          content: `Error fetching notes : ${error}`,
+          nature: "error",
+        });
+        setTimeout(() => {
+          setMessage({
+            ...message,
+            content: null,
+          });
+        }, 5000);
         setNotes([]);
       }
     }
@@ -39,6 +53,16 @@ const App = () => {
       };
 
       await noteServices.createNote(noteObject).then((createdNote) => {
+        setMessage({
+          content: "New note added!",
+          nature: "success",
+        });
+        setTimeout(() => {
+          setMessage({
+            ...message,
+            content: null,
+          });
+        }, 5000);
         setNotes(notes.concat(createdNote));
         setNewNote("");
       });
@@ -51,13 +75,32 @@ const App = () => {
 
     noteServices
       .updateNote(id, noteUpdate)
-      .then((updatedId) =>
+      .then((updatedId) => {
+        setMessage({
+          content: "Note importance updated!",
+          nature: "success",
+        });
+        setTimeout(() => {
+          setMessage({
+            ...message,
+            content: null,
+          });
+        }, 5000);
         setNotes(
           notes.map((note) => (note.id === updatedId ? noteUpdate : note))
-        )
-      )
+        );
+      })
       .catch((error) => {
-        window.alert(`Error updating note : ${error}`);
+        setMessage({
+          content: `The note "${noteUpdate.content}" was already removed from the server.`,
+          nature: "error",
+        });
+        setTimeout(() => {
+          setMessage({
+            ...message,
+            content: null,
+          });
+        }, 5000);
         setNotes(notes.filter((note) => note.id !== id));
       });
   };
@@ -66,14 +109,36 @@ const App = () => {
     noteServices
       .deleteNote(id)
       .then((deletedId) => {
+        setMessage({
+          content: "Note deleted!",
+          nature: "success",
+        });
+        setTimeout(() => {
+          setMessage({
+            ...message,
+            content: null,
+          });
+        }, 5000);
         setNotes(notes.filter((note) => note.id !== deletedId));
       })
-      .catch((error) => console.log(`Error deleting note #${id}: ${error}`));
+      .catch((error) => {
+        setMessage({
+          content: `Error deleting note : ${error}`,
+          nature: "error",
+        });
+        setTimeout(() => {
+          setMessage({
+            ...message,
+            content: null,
+          });
+        }, 5000);
+      });
   };
 
   return (
     <>
       <h2>Notes</h2>
+      <Notification message={message} />
       <Form
         addNote={addNote}
         newNote={newNote}

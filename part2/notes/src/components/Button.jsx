@@ -2,7 +2,7 @@ function Button({ showAll, setShowAll }) {
   return (
     <div>
     <button onClick={() => setShowAll(!showAll)}>
-      {showAll ? "Important" : "All Notes"}
+      {showAll ? "Show Important" : "Show All Notes"}
     </button>
     </div>
   );

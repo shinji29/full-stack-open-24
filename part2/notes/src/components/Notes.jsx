@@ -11,7 +11,7 @@ function Notes({ notes, showAll, deletion, toggleImportance }) {
         ) : (
           notesToShow.map((note) => (
             <tr key={note.id}>
-              <td>{note.content}</td>
+              <td className={"note"}>{note.content}</td>
               <td>
                 <button onClick={() => toggleImportance(note.id)}>
                   {note.important ? "Mark unimportant" : "Mark important"}
