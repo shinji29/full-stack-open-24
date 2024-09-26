@@ -1,3 +1,37 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.note {
+    color: slategray;
+    padding-top: 5px;
+    font-size: 15px;
+}
+
+.success {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    padding: 10px 20px;
+    color: white;
+    background: seagreen;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.error {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    padding: 10px 20px;
+    color: white;
+    background: red;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}

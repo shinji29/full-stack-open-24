@@ -1,4 +1,4 @@
-function Persons({ searchQuery, persons, handleDelete, handleUpdate }) {
+function Persons({ searchQuery, persons, handleDelete }) {
   const personsToShow =
     searchQuery.length === 0
       ? persons
@@ -8,13 +8,12 @@ function Persons({ searchQuery, persons, handleDelete, handleUpdate }) {
 
   return (
     <div>
-      <h2>Numbers</h2>
+      <h2>Filtered Numbers</h2>
       <table cellPadding={4} cellSpacing={2} border={1}>
         <thead align="center">
           <tr>
             <th>Name</th>
             <th>Number</th>
-            <th colSpan={2}>Options</th>
           </tr>
         </thead>
         <tbody>
@@ -22,15 +21,6 @@ function Persons({ searchQuery, persons, handleDelete, handleUpdate }) {
             <tr key={person.id}>
               <td>{person.name}</td>
               <td>{person.number}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    handleDelete(person.id);
-                  }}
-                >
-                  Delete
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>
