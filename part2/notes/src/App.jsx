@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 
 import Form from "./components/Form";
 import Notes from "./components/Notes";
+import Footer from "./components/Footer";
 import Button from "./components/Button";
 import Notification from "./components/Notification";
-
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -153,6 +153,7 @@ const App = () => {
         deletion={deletion}
         toggleImportance={toggleImportance}
       />
+      <Footer />
     </>
   );
 };
