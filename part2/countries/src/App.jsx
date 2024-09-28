@@ -6,7 +6,6 @@ import Content from "./components/Content";
 
 function App() {
   const [country, setCountry] = useState("");
-  const [countries, setCountries] = useState([]);
   const [allCountries, setAllCountries] = useState([]);
 
   useEffect(() => {
@@ -21,7 +20,10 @@ function App() {
     <>
       <h1>Countries</h1>
       <Filter country={country} setCountry={setCountry} />
-      <Content allCountries={allCountries} country={country} />
+      <Content
+        country={country}
+        allCountries={allCountries}
+      />
     </>
   );
 }
