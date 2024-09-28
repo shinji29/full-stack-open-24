@@ -20,10 +20,7 @@ function App() {
     <>
       <h1>Countries</h1>
       <Filter country={country} setCountry={setCountry} />
-      <Content
-        country={country}
-        allCountries={allCountries}
-      />
+      <Content country={country} allCountries={allCountries} />
     </>
   );
 }

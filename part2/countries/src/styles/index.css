@@ -1,3 +1,20 @@
-*{
+* {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+    width: 150px;
+}
+
+.country {
+    margin-top: -1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 3rem;
+    padding: 5px;
+}
+
+.country div {
+    min-height: 300px;
 }

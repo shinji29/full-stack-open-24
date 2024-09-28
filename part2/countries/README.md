@@ -13,7 +13,7 @@ To start an application, do the following :
 ```bash
 # Install dependancies
 $ npm i
-# create a .env file and put there the API KEY for retrieving data from https://weatherstack.com/
+# create a .env file and put there the API KEY for retrieving data from https://openweathermap.org
 $ echo "VITE_API_KEY=<YOUR-API-KEY>" > .env
 # Start the application
 $ npm run dev
