@@ -1,4 +1,4 @@
-function Persons({ searchQuery, persons, handleDelete }) {
+function Persons({ searchQuery, persons }) {
   const personsToShow =
     searchQuery.length === 0
       ? persons

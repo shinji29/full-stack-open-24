@@ -1,8 +1,22 @@
-# React + Vite
+# Countries
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In this exercise, we created an application, in which one can look at data of various countries. The data are fetched from the API https://restcountries.eu, that provides a lot data for different countries in a machine readable format, a so-called REST API.
 
-Currently, two official plugins are available:
+The user interface is very simple. The country to be shown is found by typing a search query into the search field.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In this application, it is also possible to see the current weather in the country's capital.
+
+## Start the application
+
+To start an application, do the following :
+
+```bash
+# Install dependancies
+$ npm i
+# create a .env file and put there the API KEY for retrieving data from https://weatherstack.com/
+$ echo "VITE_API_KEY=<YOUR-API-KEY>" > .env
+# Start the application
+$ npm run dev
+```
+
+You can then access the app on : http://localhost:5173/

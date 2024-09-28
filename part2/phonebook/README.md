@@ -1,8 +1,24 @@
-# React + Vite
+# Phonebook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In this exercise, we created a simple phonebook.
 
-Currently, two official plugins are available:
+In this phonebook, users have the possibility to a add, update & delete a person as well as its phone number. Person's names are unique, which means that users cannot add names that already exist in the phonebook. A search field is also available in the app to filter the people by their name.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This initial state of the application is stored in a file `db.json`, which correspond to a list of users along with their numbers. This file is used by the tool `JSON Server` that acts as a backend server where the data are stored.
+
+## Start the application
+
+To start an application, do the following :
+
+```bash
+# Install dependancies
+$ npm i
+# Start the JSON Server
+$ npm json-server --port 3001 --watch db.json
+# On another terminal, start the application
+$ npm run dev
+```
+
+You can then access the app on : [http://localhost:5173/](http://localhost:5173/)
+
+You can also see the content of the JSON Server by heading to : [http://localhost:3001/persons](http://localhost:3001/persons)
