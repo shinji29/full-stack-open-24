@@ -27,17 +27,25 @@ let persons = [
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
 app.use(express.json());
-app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  const currentDate = new Date().toString("en-US");
-  res.status(200).render("index", {
-    title: "Phonebook",
-    count: persons.length,
-    currentDate: currentDate,
+  res.status(200).json({
+    message: "Hello friend.",
   });
+});
+
+app.get("/info", (req, res) => {
+  const currentDate = new Date().toString("en-US");
+  res.status(200).send(`
+      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+        <h2>
+            Phonebook
+        </h2>
+        <p>This phonebook currently has information for <b>${persons.length}</b> people.</p>
+        <code>${currentDate}</code>
+    </div>
+    `);
 });
 
 app.get("/api/persons", (req, res) => {
