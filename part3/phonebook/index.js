@@ -31,7 +31,7 @@ const app = express();
 app.use(express.json());
 app.set("view engine", "ejs");
 
-app.get("/info", (req, res) => {
+app.get("/", (req, res) => {
   const currentDate = new Date().toString("en-US");
   res.status(200).render("index", {
     title: "Phonebook",
