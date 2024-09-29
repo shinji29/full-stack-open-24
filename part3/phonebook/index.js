@@ -100,6 +100,15 @@ app.delete("/api/persons/:id", (req, res) => {
   res.status(204);
 });
 
+app.get("*", (req, res) => {
+  res.status(404).send(`
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+        <h2>Oops!</h2>
+        <p>It seems like you are lost, my friend.</p>
+    </div>
+    `);
+});
+
 app.listen(PORT, () => {
   console.log(`Server is live on port ${PORT} 🌐`);
 });
