@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import { configDotenv } from "dotenv";
 configDotenv();
@@ -27,6 +28,8 @@ let persons = [
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
