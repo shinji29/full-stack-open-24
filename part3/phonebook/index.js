@@ -29,7 +29,12 @@ let persons = [
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://fso-2024-frontend.vercel.app",
+    methods: ["GET", "POST"],
+  })
+);
 app.use(express.json());
 
 app.get("/", (req, res) => {
