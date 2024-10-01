@@ -27,11 +27,12 @@ let persons = [
 ];
 
 const PORT = process.env.PORT || 3001;
+const ORIGIN_URL = process.env.ORIGIN_URL;
 const app = express();
 
 app.use(
   cors({
-    origin: "https://fso-2024-frontend.vercel.app",
+    origin: ORIGIN_URL,
     methods: ["GET", "POST"],
   })
 );
