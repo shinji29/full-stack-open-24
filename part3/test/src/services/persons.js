@@ -1,15 +1,27 @@
 import axios from "axios";
 
-const baseUrl = import.meta.env.VITE_PERSONS_API;
+const apiClient = axios.create({
+  baseUrl: import.meta.env.VITE_PERSONS_API,
+});
 
 function fetchAllPersons() {
-  const request = axios.get(baseUrl);
-  return request.then((response) => response.data);
+  try {
+    const response = apiClient.get("/");
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching contacts : ${error}`);
+    throw error;
+  }
 }
 
 function fetchPersonById(id) {
-  const request = axios.get(`${baseUrl}${id}`);
-  return request.then((response) => response.data);
+  try {
+    const response = apiClient.get(`/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching person with id ${id} : ${error}`);
+    throw error;
+  }
 }
 
 export default {
