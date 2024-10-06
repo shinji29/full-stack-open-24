@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import personServices from "./services/persons";
 
-import Message from "./components/Message";
 import Persons from "./components/Persons";
 import Header from "./components/Header";
 
@@ -28,8 +27,7 @@ function App() {
   return (
     <>
       <Header title="Phonebook" />
-      <Message loading={loading} error={error} />
-      <Persons persons={persons} />
+      <Persons persons={persons} loading={loading} error={error} />
     </>
   );
 }

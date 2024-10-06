@@ -13,6 +13,18 @@ body {
   flex-direction: column;
 }
 
+.message {
+  color: blue;
+  font-weight: 500;
+  padding-top: 10px;
+}
+
+.error {
+  color: red;
+  font-weight: 500;
+  padding-top: 10px;
+}
+
 .persons {
   margin-top: 1rem;
   display: flex;
@@ -21,14 +33,4 @@ body {
   align-items: start;
   flex-direction: column;
   gap: 2rem;
-}
-
-.message {
-  color: blue;
-  font-weight: 500;
-}
-
-.error {
-  color: red;
-  font-weight: 500;
 }
