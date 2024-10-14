@@ -16,6 +16,8 @@ const unknownEndpoint = (req, res) => {
 };
 
 app.use(cors());
+app.use(express.json());
+app.use(express.static("dist"));
 
 // app.use(
 //   cors({
@@ -23,8 +25,6 @@ app.use(cors());
 //     methods: ["GET", "POST"],
 //   })
 // );
-
-app.use(express.json());
 
 app.use(
   morgan((tokens, req, res) => {
@@ -41,11 +41,11 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Hello friend.",
-  });
-});
+// app.get("/", (req, res) => {
+//   res.status(200).json({
+//     message: "Hello friend.",
+//   });
+// });
 
 app.use("/info", infoRouter);
 app.use("/api/persons", personRouter);

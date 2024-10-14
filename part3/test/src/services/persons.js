@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseURL = import.meta.env.VITE_PERSONS_API;
 const apiClient = axios.create({
-  baseURL: baseURL,
+  baseURL: "/api/persons",
 });
 
 async function fetchAllPersons() {
