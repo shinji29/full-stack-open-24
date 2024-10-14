@@ -15,12 +15,14 @@ const unknownEndpoint = (req, res) => {
   res.status(404).json({ error: "This endpoint does not exist." });
 };
 
-app.use(
-  cors({
-    origin: ORIGIN_URL,
-    methods: ["GET", "POST"],
-  })
-);
+app.use(cors());
+
+// app.use(
+//   cors({
+//     origin: ORIGIN_URL,
+//     methods: ["GET", "POST"],
+//   })
+// );
 
 app.use(express.json());
 
