@@ -1,3 +1,7 @@
+/*
+
+// SUPABASE INTEGRATION ...
+
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -52,6 +56,8 @@ async function deleteNote(id) {
     return data.id;
   }
 }
+
+*/
 
 export default {
   fetchNotes,
